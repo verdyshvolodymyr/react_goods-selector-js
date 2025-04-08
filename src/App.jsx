@@ -17,7 +17,7 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('No goods selected');
-  const [selectedGoods, setSelectedGoods] = useState(['Jam']);
+  const [selectedGoods, setSelectedGoods] = useState('Jam');
 
   const toggleSelection = good => {
     setValue(`${good} is selected`);
@@ -32,7 +32,7 @@ export const App = () => {
         <button
           onClick={() => {
             setValue('No goods selected');
-            setSelectedGoods([]);
+            setSelectedGoods('');
           }}
           data-cy="ClearButton"
           type="button"
@@ -47,7 +47,7 @@ export const App = () => {
             const isSelected = selectedGoods.includes(good);
             const buttonLabel = isSelected ? '-' : '+';
             const buttonClass = isSelected ? 'button is-info' : 'button';
-            const trClass = isSelected ? 'has-background-success-dark' : '';
+            const trClass = isSelected ? 'has-background-success-light' : '';
 
             return (
               <tr data-cy="Good" key={good} className={trClass}>
@@ -55,7 +55,7 @@ export const App = () => {
                   <button
                     onClick={() => {
                       if (buttonLabel === '-') {
-                        setSelectedGoods([]);
+                        setSelectedGoods('');
                         setValue('No goods selected');
                       } else {
                         toggleSelection(good);
