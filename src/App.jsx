@@ -17,9 +17,9 @@ export const goods = [
 
 export const App = () => {
   const [value, setValue] = useState('No goods selected');
-  const [selectedGoods, setSelectedGoods] = useState([]);
+  const [selectedGoods, setSelectedGoods] = useState(['Jam']);
 
-  const toggleGood = good => {
+  const toggleSelection = good => {
     setValue(`${good} is selected`);
 
     setSelectedGoods(prev => (prev.includes(good) ? [] : [good]));
@@ -37,6 +37,7 @@ export const App = () => {
           data-cy="ClearButton"
           type="button"
           className="delete ml-3"
+          style={{ display: value !== 'No goods selected' ? 'block' : 'none' }}
         />
       </h1>
 
@@ -46,18 +47,18 @@ export const App = () => {
             const isSelected = selectedGoods.includes(good);
             const buttonLabel = isSelected ? '-' : '+';
             const buttonClass = isSelected ? 'button is-info' : 'button';
+            const trClass = isSelected ? 'has-background-success-dark' : '';
 
             return (
-              <tr data-cy="Good" key={good}>
+              <tr data-cy="Good" key={good} className={trClass}>
                 <td>
                   <button
                     onClick={() => {
                       if (buttonLabel === '-') {
-                        toggleGood(good);
                         setSelectedGoods([]);
                         setValue('No goods selected');
                       } else {
-                        toggleGood(good);
+                        toggleSelection(good);
                       }
                     }}
                     data-cy="AddButton"
